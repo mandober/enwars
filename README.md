@@ -1,141 +1,148 @@
-# Envars
+# Enwars
+
 List of common environment variables in linux
+
 
 <!-- TOC -->
 
-- [BASH](#bash)
-- [BASHOPTS](#bashopts)
-- [BASHPID](#bashpid)
-- [BASH_ALIASES](#bash_aliases)
-- [BASH_ARGC](#bash_argc)
-- [BASH_ARGV](#bash_argv)
-- [BASH_CMDS](#bash_cmds)
-- [BASH_COMMAND](#bash_command)
-- [BASH_COMPAT](#bash_compat)
-- [BASH_ENV](#bash_env)
-- [BASH_EXECUTION_STRING](#bash_execution_string)
-- [BASH_LINENO](#bash_lineno)
-- [BASH_LOADABLES_PATH](#bash_loadables_path)
-- [BASH_REMATCH](#bash_rematch)
-- [BASH_SOURCE](#bash_source)
-- [BASH_SUBSHELL](#bash_subshell)
-- [BASH_VERSINFO](#bash_versinfo)
-- [BASH_VERSINFO](#bash_versinfo-1)
-- [BASH_VERSION](#bash_version)
-- [BASH_XTRACEFD](#bash_xtracefd)
-- [BROWSER](#browser)
-- [CDPATH](#cdpath)
-- [CHILD_MAX](#child_max)
-- [COLUMNS](#columns)
-- [COMP_CWORD](#comp_cword)
-- [COMP_LINE](#comp_line)
-- [COMP_POINT](#comp_point)
-- [COMP_TYPE](#comp_type)
-- [COMP_KEY](#comp_key)
-- [COMP_WORDBREAKS](#comp_wordbreaks)
-- [COMP_WORDS](#comp_words)
-- [COMPREPLY](#compreply)
-- [COPROC](#coproc)
-- [DIRSTACK](#dirstack)
-- [DISPLAY](#display)
-- [DOMAIN](#domain)
-- [EDITOR](#editor)
-- [EMACS](#emacs)
-- [ENV](#env)
-- [EUID](#euid)
-- [EXECIGNORE](#execignore)
-- [FCEDIT](#fcedit)
-- [FIGNORE](#fignore)
-- [FUNCNAME](#funcname)
-- [FUNCNEST](#funcnest)
-- [GLOBIGNORE](#globignore)
-- [GROUPS](#groups)
-- [histchars](#histchars)
-- [HOME](#home)
-- [HOSTALIASES](#hostaliases)
-- [HISTCMD](#histcmd)
-- [HISTCONTROL](#histcontrol)
-- [HISTFILE](#histfile)
-- [HISTFILESIZE](#histfilesize)
-- [HISTIGNORE](#histignore)
-- [HISTSIZE](#histsize)
-- [HISTTIMEFORMAT](#histtimeformat)
-- [HOSTFILE](#hostfile)
-- [HOSTNAME](#hostname)
-- [HOSTTYPE](#hosttype)
-- [HTTP_PROXY](#http_proxy)
-- [IFS](#ifs)
-- [IGNOREEOF](#ignoreeof)
-- [INPUTRC](#inputrc)
-- [LANG](#lang)
-- [LC_ALL](#lc_all)
-- [LC_COLLATE](#lc_collate)
-- [LC_CTYPE](#lc_ctype)
-- [LC_MESSAGES](#lc_messages)
-- [LC_NUMERIC](#lc_numeric)
-- [LC_TIME](#lc_time)
-- [LD_LIBRARY_PATH](#ld_library_path)
-- [LINENO](#lineno)
-- [LINES](#lines)
-- [LOGNAME](#logname)
-- [LPDEST](#lpdest)
-- [LS_COLORS](#ls_colors)
-- [MACHTYPE](#machtype)
-- [MAILCHECK](#mailcheck)
-- [MANPATH](#manpath)
-- [MAPFILE](#mapfile)
-- [MAIL](#mail)
-- [MAILCHECK](#mailcheck-1)
-- [MAILPATH](#mailpath)
-- [NNTPSERVER](#nntpserver)
-- [OLDPWD](#oldpwd)
-- [OPTARG](#optarg)
-- [OPTIND](#optind)
-- [OPTERR](#opterr)
-- [OSTYPE](#ostype)
-- [PAGER](#pager)
-- [PATH](#path)
-- [PIPESTATUS](#pipestatus)
-- [POSIXLY_CORRECT](#posixly_correct)
-- [_POSIX2_VERSION](#_posix2_version)
-- [PPID](#ppid)
-- [PRINTER](#printer)
-- [PROMPT_COMMAND](#prompt_command)
-- [PROMPT_DIRTRIM](#prompt_dirtrim)
-- [PS0](#ps0)
-- [PS1](#ps1)
-- [PS2](#ps2)
-- [PS3](#ps3)
-- [PS4](#ps4)
-- [PWD](#pwd)
-- [RANDOM](#random)
-- [READLINE_LINE](#readline_line)
-- [READLINE_POINT](#readline_point)
-- [REPLY](#reply)
-- [SECONDS](#seconds)
-- [SHELL](#shell)
-- [SHELLOPTS](#shellopts)
-- [SHLVL](#shlvl)
-- [TERM](#term)
-- [TERMCAP](#termcap)
-- [TERMINFO](#terminfo)
-- [TMPDIR](#tmpdir)
-- [TIMEFORMAT](#timeformat)
-- [TMOUT](#tmout)
-- [TMPDIR](#tmpdir-1)
-- [TZ](#tz)
-- [TZDIR](#tzdir)
-- [UID](#uid)
-- [USER](#user)
-- [VISUAL](#visual)
-- [XDG_DATA_HOME](#xdg_data_home)
-- [XDG_CONFIG_HOME](#xdg_config_home)
-- [XDG_DATA_DIRS](#xdg_data_dirs)
-- [XDG_CONFIG_DIRS](#xdg_config_dirs)
-- [XDG_CACHE_HOME](#xdg_cache_home)
-- [XDG_RUNTIME_DIR](#xdg_runtime_dir)
-- [XENVIRONMENT](#xenvironment)
-- [XFILESEARCHPATH](#xfilesearchpath)
+- [Enwars](#enwars)
+  - [BASH](#bash)
+  - [BASHOPTS](#bashopts)
+  - [BASHPID](#bashpid)
+  - [BASH_ALIASES](#bash_aliases)
+  - [BASH_ARGC](#bash_argc)
+  - [BASH_ARGV](#bash_argv)
+  - [BASH_CMDS](#bash_cmds)
+  - [BASH_COMMAND](#bash_command)
+  - [BASH_COMPAT](#bash_compat)
+  - [BASH_ENV](#bash_env)
+  - [BASH_EXECUTION_STRING](#bash_execution_string)
+  - [BASH_LINENO](#bash_lineno)
+  - [BASH_LOADABLES_PATH](#bash_loadables_path)
+  - [BASH_REMATCH](#bash_rematch)
+  - [BASH_SOURCE](#bash_source)
+  - [BASH_SUBSHELL](#bash_subshell)
+  - [BASH_VERSINFO](#bash_versinfo)
+  - [BASH_VERSINFO](#bash_versinfo-1)
+  - [BASH_VERSION](#bash_version)
+  - [BASH_XTRACEFD](#bash_xtracefd)
+  - [BROWSER](#browser)
+  - [CDPATH](#cdpath)
+  - [CHILD_MAX](#child_max)
+  - [COLUMNS](#columns)
+  - [COMP_CWORD](#comp_cword)
+  - [COMP_LINE](#comp_line)
+  - [COMP_POINT](#comp_point)
+  - [COMP_TYPE](#comp_type)
+  - [COMP_KEY](#comp_key)
+  - [COMP_WORDBREAKS](#comp_wordbreaks)
+  - [COMP_WORDS](#comp_words)
+  - [COMPREPLY](#compreply)
+  - [COPROC](#coproc)
+  - [DIRSTACK](#dirstack)
+  - [DISPLAY](#display)
+  - [DOMAIN](#domain)
+  - [EDITOR](#editor)
+  - [EMACS](#emacs)
+  - [ENV](#env)
+  - [EUID](#euid)
+  - [EXECIGNORE](#execignore)
+  - [FCEDIT](#fcedit)
+  - [FIGNORE](#fignore)
+  - [FUNCNAME](#funcname)
+  - [FUNCNEST](#funcnest)
+  - [GLOBIGNORE](#globignore)
+  - [GROUPS](#groups)
+  - [histchars](#histchars)
+  - [HOME](#home)
+  - [HOSTALIASES](#hostaliases)
+  - [HISTCMD](#histcmd)
+  - [HISTCONTROL](#histcontrol)
+  - [HISTFILE](#histfile)
+  - [HISTFILESIZE](#histfilesize)
+  - [HISTIGNORE](#histignore)
+  - [HISTSIZE](#histsize)
+  - [HISTTIMEFORMAT](#histtimeformat)
+  - [HOSTFILE](#hostfile)
+  - [HOSTNAME](#hostname)
+  - [HOSTTYPE](#hosttype)
+  - [HTTP_PROXY](#http_proxy)
+  - [IFS](#ifs)
+  - [IGNOREEOF](#ignoreeof)
+  - [INPUTRC](#inputrc)
+  - [LANG](#lang)
+  - [LC_ALL](#lc_all)
+  - [LC_COLLATE](#lc_collate)
+  - [LC_CTYPE](#lc_ctype)
+  - [LC_MESSAGES](#lc_messages)
+  - [LC_NUMERIC](#lc_numeric)
+  - [LC_TIME](#lc_time)
+  - [LD_LIBRARY_PATH](#ld_library_path)
+  - [LINENO](#lineno)
+  - [LINES](#lines)
+  - [LOGNAME](#logname)
+  - [LPDEST](#lpdest)
+  - [LS_COLORS](#ls_colors)
+  - [MACHTYPE](#machtype)
+  - [MAILCHECK](#mailcheck)
+  - [MANPATH](#manpath)
+  - [MAPFILE](#mapfile)
+  - [MAIL](#mail)
+  - [MAILCHECK](#mailcheck-1)
+  - [MAILPATH](#mailpath)
+  - [NNTPSERVER](#nntpserver)
+  - [OLDPWD](#oldpwd)
+  - [OPTARG](#optarg)
+  - [OPTIND](#optind)
+  - [OPTERR](#opterr)
+  - [OSTYPE](#ostype)
+  - [PAGER](#pager)
+  - [PATH](#path)
+  - [PIPESTATUS](#pipestatus)
+  - [POSIXLY_CORRECT](#posixly_correct)
+  - [_POSIX2_VERSION](#_posix2_version)
+  - [PREFIX](#prefix)
+  - [PPID](#ppid)
+  - [PRINTER](#printer)
+  - [PROMPT_COMMAND](#prompt_command)
+  - [PROMPT_DIRTRIM](#prompt_dirtrim)
+  - [PS0](#ps0)
+  - [PS1](#ps1)
+  - [PS2](#ps2)
+  - [PS3](#ps3)
+  - [PS4](#ps4)
+  - [PWD](#pwd)
+  - [RANDOM](#random)
+  - [READLINE_LINE](#readline_line)
+  - [READLINE_POINT](#readline_point)
+  - [REPLY](#reply)
+  - [SECONDS](#seconds)
+  - [SHELL](#shell)
+  - [SHELLOPTS](#shellopts)
+  - [SHLVL](#shlvl)
+  - [TEMP](#temp)
+  - [TERM](#term)
+  - [TERM_PROGRAM](#term_program)
+  - [TERMCAP](#termcap)
+  - [TERMINFO](#terminfo)
+  - [TMP](#tmp)
+  - [TMPDIR](#tmpdir)
+  - [TIMEFORMAT](#timeformat)
+  - [TMOUT](#tmout)
+  - [TMPDIR](#tmpdir-1)
+  - [TZ](#tz)
+  - [TZDIR](#tzdir)
+  - [UID](#uid)
+  - [USER](#user)
+  - [VISUAL](#visual)
+  - [XDG_DATA_HOME](#xdg_data_home)
+  - [XDG_CONFIG_HOME](#xdg_config_home)
+  - [XDG_DATA_DIRS](#xdg_data_dirs)
+  - [XDG_CONFIG_DIRS](#xdg_config_dirs)
+  - [XDG_CACHE_HOME](#xdg_cache_home)
+  - [XDG_RUNTIME_DIR](#xdg_runtime_dir)
+  - [XENVIRONMENT](#xenvironment)
+  - [XFILESEARCHPATH](#xfilesearchpath)
 
 <!-- /TOC -->
 
@@ -143,30 +150,29 @@ List of common environment variables in linux
 
 
 ## BASH
-The full pathname used to execute the current instance of Bash.
+The full pathname used to execute the current instance of bash.  
+Example value: `/bin/bash/`.  
+> `set by bash`
 
 ## BASHOPTS
-A colon-separated list of enabled shell options. Each word in the list is a valid arg
-for `shopt -s`. The options appearing in BASHOPTS are those reported as `on` by `shopt`.
-If this variable is in the environment when Bash starts up, each shell option in the 
-list will be enabled before reading any startup files. This variable is *readonly*.
+A colon-separated list of enabled shell options. Each word in the list is a valid argument for `shopt -s|-u`. If this variable is in the environment when Bash starts up, each shell option in the list will be enabled before reading any startup files.  
+Example value: `dotglob:extglob:extquote:globstar:lastpipe`  
+> `readonly`, `set by bash`
 
 ## BASHPID
-Expands to the process ID of the current Bash process. This differs from `$$` under 
-certain circumstances, such as subshells that do not require Bash to be re-initialized.
+Expands to the process ID of the current Bash process. This differs from `$$` under certain circumstances, such as subshells that do not require Bash to be re-initialized.  
+Example value: `4`  
+> `readonly`, `set by bash`
+
 
 ## BASH_ALIASES
-An associative array variable whose members correspond to the internal list of aliases 
-as maintained by the alias builtin. Elements added to this array appear in the alias list;
-however, unsetting array elements currently does not cause aliases to be removed from the
-alias list. *If unset, it loses its special properties*, even if it is subsequently reset.
+An associative array variable whose members correspond to the internal list of aliases as maintained by the alias builtin. Elements added to this array appear in the alias list;
+however, unsetting array elements currently does not cause aliases to be removed from the alias list. If unset, it loses its special properties, even if it is subsequently reset.
+> `special`, `ass.array`, `set by bash`
+
 
 ## BASH_ARGC
-An array variable whose values are the number of parameters in each frame of the current 
-bash execution call stack. The number of parameters to the current subroutine (shell 
-function or script executed with `source`) is at the top of the stack. When a subroutine 
-is executed, the number of parameters passed is pushed onto BASH_ARGC. The shell sets 
-BASH_ARGC only when in extended debugging mode, `shopt -s extdebug`.
+An array variable whose values are the number of parameters in each frame of the current bash execution call stack. The number of parameters to the current subroutine (shell function or script executed with `source`) is at the top of the stack. When a subroutine is executed, the number of parameters passed is pushed onto BASH_ARGC. The shell sets BASH_ARGC only when in extended debugging mode, `shopt -s extdebug`.
 
 ## BASH_ARGV
 An array variable containing all of the parameters in the current bash execution call 
@@ -628,9 +634,10 @@ TZ and TZDIR give timezone information used by tzset(3) and through that by func
 like ctime(3), localtime(3), mktime(3), strftime(3). See also tzselect(8).
 
 ## UID
-Used to check whether the current script has been run as root user or regular user.
-It contains the numeric real user id of the current user. This variable is *readonly*.
-`((UID != 0)) && echo "Please run this as root"`
+Contains the numeric real user id of the current user. Commonly used in scripts, 
+`[ $UID != 0 ] && echo "not root"`, to check whether the current script has been 
+run as root user or regular user. This variable is readonly.  
+`readonly`, `bash`, `zsh`
 
 ## USER
 The name of the logged-in user (used by some BSD-derived programs).
