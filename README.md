@@ -84,12 +84,11 @@ List of common environment variables in linux
   - [LPDEST](#lpdest)
   - [LS_COLORS](#ls_colors)
   - [MACHTYPE](#machtype)
+  - [MAIL](#mail)
   - [MAILCHECK](#mailcheck)
+  - [MAILPATH](#mailpath)
   - [MANPATH](#manpath)
   - [MAPFILE](#mapfile)
-  - [MAIL](#mail)
-  - [MAILCHECK](#mailcheck-1)
-  - [MAILPATH](#mailpath)
   - [NNTPSERVER](#nntpserver)
   - [OLDPWD](#oldpwd)
   - [OPTARG](#optarg)
@@ -437,15 +436,6 @@ ls command's spec for colors
 A string that fully describes the system type on which Bash is executing, in the 
 standard GNU cpu-company-system format.
 
-## MAILCHECK
-How often (in seconds) that the shell should check for mail in the files specified in the MAILPATH or MAIL variables. The default is 60 seconds. When it is time to check for mail, the shell does so before displaying the primary prompt. If this variable is unset, or set to a value that is not a number greater than or equal to zero, the shell disables mail checking.
-
-## MANPATH
-Colon separated list of directories to search for manual pages.
-
-## MAPFILE
-An array variable created to hold the text read by the mapfile builtin when no variable name is supplied.
-
 ## MAIL
 If this parameter is set to a filename or directory name (and the MAILPATH variable is not set), Bash informs the user of the arrival of mail in the specified file or Maildir-format directory. Overridden by MAILPATH.  
 This variable can be used to monitor any file or directory: 
@@ -453,18 +443,23 @@ This variable can be used to monitor any file or directory:
 - if directory is monitored, the shell will alert when new files are added or deleted from it
 To monitor several files/directories and specify custom alert messages, see `MAILPATH`.  
 Example: `MAIL=$HOME/.bashrc`  
+> `filename`
 
 ## MAILCHECK
-Specifies how often (in seconds) bash checks for mail. 
-* The default is 60 seconds. 
-* When it is time to check for mail, the shell does so before displaying the primary prompt. 
-* If not set to an integer greater than 0, the shell disables mail checking.
+Specifies how often (in seconds) the shell checks for mail (as specified in the MAILPATH or MAIL). The default is 60 seconds. When it is time to check for mail, the shell does so before displaying the primary prompt. If not set to an integer greater than 0, the shell disables mail checking.
+> `integer`
 
 ## MAILPATH
 A colon-separated list of filenames which the shell periodically checks for new mail.  
 Each list entry can specify the message that is printed when new mail arrives in the mail file by separating the filename from the message with a `?`. When used in the text of the message, `$_` expands to the name of the current mail file (but it must be inside single quotes, otherwise it will expand into shell variable, `$_`, which contains the last argument of the previous command).  
 This variable can be used to monitor any file or directory: see MAIL.  
 Example: `MAILPATH=$HOME/.bashrc?'$_ modified!':$HOME/dots?'New file added in $_'`  
+
+## MANPATH
+Colon separated list of directories to search for manual pages.
+
+## MAPFILE
+An array variable created to hold the text read by the mapfile builtin when no variable name is supplied.
 
 ## NNTPSERVER
 Specify a news server that some Usenet news readers require to access the news (nntp) server.
