@@ -447,19 +447,24 @@ Colon separated list of directories to search for manual pages.
 An array variable created to hold the text read by the mapfile builtin when no variable name is supplied.
 
 ## MAIL
-If this parameter is set to a filename or directory name (and the MAILPATH variable is not set), Bash informs the user of the arrival of mail in the specified file or Maildir-format directory. Overridden by MAILPATH.
-- if filename is specified, bash will monitor that file for changes
-- if directory is specified, bash will dislay alert when new file is added to that directory.
-- To monitor several files or directories and specify custom messages, see `MAILPATH`.
+If this parameter is set to a filename or directory name (and the MAILPATH variable is not set), Bash informs the user of the arrival of mail in the specified file or Maildir-format directory. Overridden by MAILPATH.  
+This variable can be used to monitor any file or directory: 
+- if file is monitored, the shell will print alerts when file's content is changed
+- if directory is monitored, the shell will alert when new files are added or deleted from it
+To monitor several files/directories and specify custom alert messages, see `MAILPATH`.  
+Example: `MAIL=$HOME/.bashrc`  
 
 ## MAILCHECK
 Specifies how often (in seconds) bash checks for mail. 
 * The default is 60 seconds. 
 * When it is time to check for mail, the shell does so before displaying the primary prompt. 
-* If this variable is unset, or set to a value that is not a number greater than or equal to zero, the shell disables mail checking.
+* If not set to an integer greater than 0, the shell disables mail checking.
 
 ## MAILPATH
-A colon-separated list of filenames which the shell periodically checks for new mail. Each list entry can specify the message that is printed when new mail arrives in the mail file by separating the filename from the message with a `?`. When used in the text of the message, `$_` expands to the name of the current mail file. There is a maximum of 10 mailboxes that can be monitored at once (`dash`).
+A colon-separated list of filenames which the shell periodically checks for new mail.  
+Each list entry can specify the message that is printed when new mail arrives in the mail file by separating the filename from the message with a `?`. When used in the text of the message, `$_` expands to the name of the current mail file (but it must be inside single quotes, otherwise it will expand into shell variable, `$_`, which contains the last argument of the previous command).  
+This variable can be used to monitor any file or directory: see MAIL.  
+Example: `MAILPATH=$HOME/.bashrc?'$_ modified!':$HOME/dots?'New file added in $_'`  
 
 ## NNTPSERVER
 Specify a news server that some Usenet news readers require to access the news (nntp) server.
