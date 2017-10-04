@@ -151,14 +151,14 @@ List of common environment variables in linux
 The full pathname used to execute the current instance of bash.  
 > Shell: bash  
 > Type: pathname  
-> Example: `/bin/bash`  
+> Example: `BASH=/bin/bash`  
 
 ## BASHOPTS
-A colon-separated list of enabled shell options. Each word in the list is a valid argument for `shopt -s|-u`. If this variable is in the environment when Bash starts up, each shell option in the list will be enabled before reading any startup files.  
+List of enabled shell options. Each word in the list is a valid argument for `shopt -s|-u`. If this variable is in the environment when Bash starts up, each shell option in the list will be enabled before reading any startup files.  
 > Shell: bash  
 > Type: colon-separated values  
 > Attributes: readonly  
-> Example: `dotglob:extglob:extquote:globstar:lastpipe`  
+> Example: `BASHOPTS=dotglob:extglob:extquote:globstar:lastpipe`  
 
 ## BASHPID
 Expands to the process ID of the current Bash process. This differs from `$$` under certain circumstances, such as subshells that do not require Bash to be re-initialized.  
@@ -167,72 +167,77 @@ Expands to the process ID of the current Bash process. This differs from `$$` un
 > Attributes: readonly  
 
 ## BASH_ALIASES
-An associative array variable whose members correspond to the internal list of aliases as maintained by the alias builtin. Elements added to this array appear in the alias list; however, unsetting array elements currently does not cause aliases to be removed from the alias list. If unset, it loses its special properties, even if it is subsequently reset.  
+An associative array whose members correspond to the internal list of aliases as maintained by the alias builtin. Elements added to this array will appear in the alias list; however, unsetting elements does not cause aliases to be removed.  
 > Shell: bash  
 > Type: associative array  
 > Attributes: special  
+> Example: `BASH_ALIASES=([pp]="echo ${PATH//:/$'\f\r'}")`  
 
 ## BASH_ARGC
-An array variable whose values are the number of parameters in each frame of the current bash execution call stack. The number of parameters to the current subroutine (shell function or script executed with `source`) is at the top of the stack. When a subroutine is executed, the number of parameters passed is pushed onto BASH_ARGC. The shell sets BASH_ARGC only when in extended debugging mode, `shopt -s extdebug`.
+An array whose values are the number of parameters in each frame of the current bash execution call stack. The number of parameters to the current subroutine (shell function or script executed with `source`) is at the top of the stack. When a subroutine is executed, the number of parameters passed is pushed onto BASH_ARGC. The shell sets BASH_ARGC only when in extended debugging mode.  
 > Shell: bash  
 > Type: indexed array  
-> Attributes: debug  
+> Context: debugging  
 
 ## BASH_ARGV
-An array variable containing all of the parameters in the current bash execution call stack. The final parameter of the last subroutine call is at the top of the stack; the first parameter of the initial call is at the bottom. When a subroutine is executed, the parameters supplied are pushed onto BASH_ARGV. The shell sets BASH_ARGV only when in extended debugging mode, `shopt -s extdebug`.
+An array containing all of the parameters in the current bash execution call stack. The final parameter of the last subroutine call is at the top of the stack; the first parameter of the initial call is at the bottom. When a subroutine is executed, the parameters supplied are pushed onto BASH_ARGV. The shell sets BASH_ARGV only when in extended debugging mode.  
 > Shell: bash  
 > Type: indexed array  
-> Attributes: debug  
+> Context: debugging  
 
 ## BASH_CMDS
-An associative array variable whose members correspond to the internal hash table of commands as maintained by the `hash` builtin. Elements added to this array appear in the hash table; however, unsetting array elements currently does not cause command names to be removed from the hash table. If unset, it loses its special properties, even if it is subsequently reset.
+An associative array variable whose members correspond to the internal hash table of commands as maintained by the `hash` builtin. Elements added to this array appear in the hash table; however, unsetting array elements currently does not cause command names to be removed from the hash table.  
 > Shell: bash  
 > Type: associative array  
 > Attributes: special  
 
 ## BASH_COMMAND
-The command currently being executed or about to be executed, unless the shell is executing a command as the result of a trap, in which case it is the command executing at the time of the trap.
+The command currently being executed or about to be executed, unless the shell is executing a command as the result of a trap, in which case it is the command executing at the time of the trap.  
+> Shell: bash  
+> Context: debugging  
 
 ## BASH_COMPAT
-The value is used to set the shell’s compatibility level. See The Shopt Builtin, for a 
-description of the various compatibility levels and their effects. The value may be a 
-decimal number (e.g., 4.2) or an integer (e.g., 42) corresponding to the desired 
-compatibility level. If BASH_COMPAT is unset or set to the empty string, the compatibility 
-level is set to the default for the current version. If BASH_COMPAT is set to a value 
-that is not one of the valid compatibility levels, the shell prints an error message and 
-sets the compatibility level to the default for the current version. The valid compatibility 
-levels correspond to the compatibility options accepted by the `shopt` builtin (for 
-example, compat42 means that 4.2 and 42 are valid values). The current version is also 
-a valid value.
+The value is used to set the shell’s compatibility level. The value may be a decimal number (4.2) or an integer (42) corresponding to the desired compatibility level. If unset or set to null string, the compatibility level is set to current version. If set to invalid string, the shell prints an error and sets the compatibility level to current version. Accepted values: 31, 32, 40, 41, 42, 43, 44
+> Shell: bash  
+> Context: compatibility  
 
 ## BASH_ENV
-If this variable is set when Bash is invoked to execute a shell script, its value is expanded and used as the name of a startup file to read before executing the script.
-> filename, bash, bash hook
-
+If set, its value (subject to parameter expansion, command substitution, and arithmetic expansion) is interpreted as a filename to a file that will be sourced in the same environment as the script about to be executed. BASH_ENV has to be exported and resultant filename has to be absolute.  
+> Shell: bash  
+> Context: hook  
+> Example: `export BASH_ENV=$HOME/pre-script-hook`  
 
 ## BASH_EXECUTION_STRING
 The command argument to the -c invocation option.
+> Shell: bash  
 
 ## BASH_LINENO
 An array variable whose members are the line numbers in source files where each corresponding member of FUNCNAME was invoked. ${BASH_LINENO[$i]} is the line number in the source file (${BASH_SOURCE[$i+1]}) where ${FUNCNAME[$i]} was called (or ${BASH_LINENO[$i-1]} if referenced within another shell function). Use LINENO to obtain the current line number.
+> Shell: bash  
+> Context: debugging  
 
 ## BASH_LOADABLES_PATH
 A colon-separated list of directories in which the shell looks for dynamically loadable builtins specified by the enable command.
+> Shell: bash  
 
 ## BASH_REMATCH
 An array variable whose members are assigned by the ‘=~’ binary operator to the [[ conditional 
 command. The element with index 0 is the portion of the string matching the entire 
 regular expression. The element with index n is the portion of the string matching the 
 nth parenthesized subexpression. This variable is READ-ONLY.
+> Shell: bash  
 
 ## BASH_SOURCE
 An array variable whose members are the source filenames where the corresponding shell function names in the FUNCNAME array variable are defined. The shell function ${FUNCNAME[$i]} is defined in the file ${BASH\_SOURCE[$i]} and called from ${BASH_SOURCE[$i+1]}
+> Shell: bash  
 
 ## BASH_SUBSHELL
 Incremented by one within each subshell or subshell environment when the shell begins executing in that environment. The initial value is 0.
+> Shell: bash  
 
 ## BASH_VERSINFO
 A readonly array variable (see Arrays) whose members hold version information for this instance of Bash. The values assigned to the array members are as follows:
+> Shell: bash  
 
 ## BASH_VERSINFO
 BASH_VERSINFO[0] - The major version number (the release).  
@@ -241,12 +246,15 @@ BASH_VERSINFO[2] - The patch level.
 BASH_VERSINFO[3] - The build version.  
 BASH_VERSINFO[4] - The release status (e.g., beta1).
 BASH_VERSINFO[5] - The value of MACHTYPE.  
+> Shell: bash  
 
 ## BASH_VERSION
 The version number of the current instance of Bash.
+> Shell: bash  
 
 ## BASH_XTRACEFD
 If set to an integer corresponding to a valid file descriptor, Bash will write the trace output generated when ‘set -x’ is enabled to that file descriptor. This allows tracing output to be separated from diagnostic and error messages. The file descriptor is closed when BASH\_XTRACEFD is unset or assigned a new value. Unsetting BASH\_XTRACEFD or assigning it the empty string causes the trace output to be sent to the standard error. Note that setting BASH_XTRACEFD to 2 (the standard error file descriptor) and then unsetting it will result in the standard error being closed.
+> Shell: bash  
 
 ## BROWSER
 Set name of default browser.
@@ -257,44 +265,46 @@ A colon-separated list of directories used as a search path for the `cd` builtin
 - If the target is not found, the path names that are listed in the CDPATH variable are searched consecutively until the target directory is found and the directory change is completed.
 - If the target directory is not found, the current working directory is left unmodified.
 - For example, suppose the CDPATH variable is set to `/home/jean`, and two directories exist under `/home/jean`, `bin`, and `doc`. If you are in the `/home/jean/bin` directory and type `cd doc`, you change directories to `/home/jean/doc`, even though you do not specify a full path.  
+> Shell: bash  
 
 ## CHILD_MAX
 Set the number of exited child status values for the shell to remember. Bash will not allow this value to be decreased below a POSIX-mandated minimum, and there is a maximum value (currently 8192) that this may not exceed. The minimum value is system-dependent.
+> Shell: bash  
 
 ## COLUMNS
 Used by the select command to determine the terminal width when printing selection lists. Automatically set if the checkwinsize option is enabled (see The Shopt Builtin), or in an interactive shell upon receipt of a SIGWINCH.
 
 ## COMP_CWORD
-An index into ${COMP_WORDS} of the word containing the current cursor position. This variable is available only in shell functions invoked by the programmable completion facilities (see Programmable Completion).
-> readline
+An index into ${COMP_WORDS} of the word containing the current cursor position. This variable is available only in shell functions invoked by the programmable completion facilities.
+> Shell: bash, readline, completion
 
 ## COMP_LINE
 The current command line. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
-> readline
+> Shell: bash, readline
 
 ## COMP_POINT
 The index of the current cursor position relative to the beginning of the current command. If the current cursor position is at the end of the current command, the value of this variable is equal to ${#COMP_LINE}. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
-> readline
+> Shell: bash, readline
 
 ## COMP_TYPE
 Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ‘?’, for listing completions after successive tabs, ‘!’, for listing alternatives on partial word completion, ‘@’, to list completions if the word is not unmodified, or ‘%’, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
-> readline
+> Shell: bash, readline
 
 ## COMP_KEY
 The key (or final key of a key sequence) used to invoke the current completion function.
-> readline
+> Shell: bash, readline
 
 ## COMP_WORDBREAKS
 The set of characters that the Readline library treats as word separators when performing word completion. If COMP_WORDBREAKS is unset, it loses its special properties, even if it is subsequently reset.
-> readline
+> Shell: bash, readline
 
 ## COMP_WORDS
 An array variable consisting of the individual words in the current command line. The line is split into words as Readline would split it, using COMP_WORDBREAKS as described above. This variable is available only in shell functions invoked by the programmable completion facilities.
-> readline
+> Shell: bash, readline
 
 ## COMPREPLY
 An array variable from which Bash reads the possible completions generated by a shell function invoked by the programmable completion facility. Each array element contains one possible completion.
-> readline
+> Shell: bash, readline
 
 ## COPROC
 An array variable created to hold the file descriptors for output from and input to an unnamed coprocess.
@@ -693,3 +703,7 @@ location of your personal settings for X behavior
 
 ## XFILESEARCHPATH
 paths to search for graphical libraries
+
+---
+
+`special` attribute means that if varible is unset, it loses its special properties, even if it is subsequently reset.  
