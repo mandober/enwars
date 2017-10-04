@@ -149,46 +149,49 @@ List of common environment variables in linux
 
 ## BASH
 The full pathname used to execute the current instance of bash.  
-Example value: `/bin/bash/`.  
-> `set by bash`
+> Shell: bash  
+> Type: pathname  
+> Example: `/bin/bash`  
 
 ## BASHOPTS
 A colon-separated list of enabled shell options. Each word in the list is a valid argument for `shopt -s|-u`. If this variable is in the environment when Bash starts up, each shell option in the list will be enabled before reading any startup files.  
-Example value: `dotglob:extglob:extquote:globstar:lastpipe`  
-> `readonly`, `set by bash`
+> Shell: bash  
+> Type: colon-separated values  
+> Attributes: readonly  
+> Example: `dotglob:extglob:extquote:globstar:lastpipe`  
 
 ## BASHPID
 Expands to the process ID of the current Bash process. This differs from `$$` under certain circumstances, such as subshells that do not require Bash to be re-initialized.  
-Example value: `4`  
-> `readonly`, `set by bash`
+> Shell: bash  
+> Type: integer  
+> Attributes: readonly  
 
 ## BASH_ALIASES
-An associative array variable whose members correspond to the internal list of aliases as maintained by the alias builtin. Elements added to this array appear in the alias list;
-however, unsetting array elements currently does not cause aliases to be removed from the alias list. If unset, it loses its special properties, even if it is subsequently reset.
-> `special`, `ass.array`, `set by bash`
-
+An associative array variable whose members correspond to the internal list of aliases as maintained by the alias builtin. Elements added to this array appear in the alias list; however, unsetting array elements currently does not cause aliases to be removed from the alias list. If unset, it loses its special properties, even if it is subsequently reset.  
+> Shell: bash  
+> Type: associative array  
+> Attributes: special  
 
 ## BASH_ARGC
 An array variable whose values are the number of parameters in each frame of the current bash execution call stack. The number of parameters to the current subroutine (shell function or script executed with `source`) is at the top of the stack. When a subroutine is executed, the number of parameters passed is pushed onto BASH_ARGC. The shell sets BASH_ARGC only when in extended debugging mode, `shopt -s extdebug`.
+> Shell: bash  
+> Type: indexed array  
+> Attributes: debug  
 
 ## BASH_ARGV
-An array variable containing all of the parameters in the current bash execution call 
-stack. The final parameter of the last subroutine call is at the top of the stack; the 
-first parameter of the initial call is at the bottom. When a subroutine is executed, the 
-parameters supplied are pushed onto BASH_ARGV. The shell sets BASH_ARGV only when in 
-extended debugging mode, `shopt -s extdebug`.
+An array variable containing all of the parameters in the current bash execution call stack. The final parameter of the last subroutine call is at the top of the stack; the first parameter of the initial call is at the bottom. When a subroutine is executed, the parameters supplied are pushed onto BASH_ARGV. The shell sets BASH_ARGV only when in extended debugging mode, `shopt -s extdebug`.
+> Shell: bash  
+> Type: indexed array  
+> Attributes: debug  
 
 ## BASH_CMDS
-An associative array variable whose members correspond to the internal hash table of 
-commands as maintained by the `hash` builtin. Elements added to this array appear in the 
-hash table; however, unsetting array elements currently does not cause command names to 
-be removed from the hash table. *If unset, it loses its special properties*, even if it 
-is subsequently reset.
+An associative array variable whose members correspond to the internal hash table of commands as maintained by the `hash` builtin. Elements added to this array appear in the hash table; however, unsetting array elements currently does not cause command names to be removed from the hash table. If unset, it loses its special properties, even if it is subsequently reset.
+> Shell: bash  
+> Type: associative array  
+> Attributes: special  
 
 ## BASH_COMMAND
-The command currently being executed or about to be executed, unless the shell is 
-executing a command as the result of a trap, in which case it is the command executing 
-at the time of the trap.
+The command currently being executed or about to be executed, unless the shell is executing a command as the result of a trap, in which case it is the command executing at the time of the trap.
 
 ## BASH_COMPAT
 The value is used to set the shell’s compatibility level. See The Shopt Builtin, for a 
@@ -203,8 +206,9 @@ example, compat42 means that 4.2 and 42 are valid values). The current version i
 a valid value.
 
 ## BASH_ENV
-If this variable is set when Bash is invoked to execute a shell script, its value is 
-expanded and used as the name of a startup file to read before executing the script.
+If this variable is set when Bash is invoked to execute a shell script, its value is expanded and used as the name of a startup file to read before executing the script.
+> filename, bash, bash hook
+
 
 ## BASH_EXECUTION_STRING
 The command argument to the -c invocation option.
@@ -262,27 +266,35 @@ Used by the select command to determine the terminal width when printing selecti
 
 ## COMP_CWORD
 An index into ${COMP_WORDS} of the word containing the current cursor position. This variable is available only in shell functions invoked by the programmable completion facilities (see Programmable Completion).
+> readline
 
 ## COMP_LINE
-The current command line. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion).
+The current command line. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
+> readline
 
 ## COMP_POINT
-The index of the current cursor position relative to the beginning of the current command. If the current cursor position is at the end of the current command, the value of this variable is equal to ${#COMP_LINE}. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion).
+The index of the current cursor position relative to the beginning of the current command. If the current cursor position is at the end of the current command, the value of this variable is equal to ${#COMP_LINE}. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
+> readline
 
 ## COMP_TYPE
-Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ‘?’, for listing completions after successive tabs, ‘!’, for listing alternatives on partial word completion, ‘@’, to list completions if the word is not unmodified, or ‘%’, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities (see Programmable Completion).
+Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ‘?’, for listing completions after successive tabs, ‘!’, for listing alternatives on partial word completion, ‘@’, to list completions if the word is not unmodified, or ‘%’, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
+> readline
 
 ## COMP_KEY
 The key (or final key of a key sequence) used to invoke the current completion function.
+> readline
 
 ## COMP_WORDBREAKS
 The set of characters that the Readline library treats as word separators when performing word completion. If COMP_WORDBREAKS is unset, it loses its special properties, even if it is subsequently reset.
+> readline
 
 ## COMP_WORDS
 An array variable consisting of the individual words in the current command line. The line is split into words as Readline would split it, using COMP_WORDBREAKS as described above. This variable is available only in shell functions invoked by the programmable completion facilities.
+> readline
 
 ## COMPREPLY
 An array variable from which Bash reads the possible completions generated by a shell function invoked by the programmable completion facility. Each array element contains one possible completion.
+> readline
 
 ## COPROC
 An array variable created to hold the file descriptors for output from and input to an unnamed coprocess.
@@ -304,12 +316,13 @@ If Bash finds this variable in the environment when the shell starts with value 
 
 ## ENV
 Similar to BASH_ENV; used when the shell is invoked in POSIX Mode.
+> filename, sh, bash, sh hook
 
 ## EUID
 The numeric effective user id of the current user. This variable is readonly.
 
 ## EXECIGNORE
-A colon-separated list of shell patterns defining the list of filenames to be ignored by command search using PATH. Files whose full pathnames match one of these patterns are not considered executable files for the purposes of completion and command execution via PATH lookup. This does not affect the behavior of the [, test, and [[ commands. Full pathnames in the command hash table are not subject to EXECIGNORE. Use this variable to ignore shared library files that have the executable bit set, but are not executable files. The pattern matching honors the setting of the extglob shell option.
+A colon-separated list of shell patterns defining the list of filenames to be ignored by command search using PATH. Files whose full pathnames match one of these patterns are not considered executable files for the purposes of completion and command execution via PATH lookup. This does not affect the behavior of the \[, test, and [[ commands. Full pathnames in the command hash table are not subject to EXECIGNORE. Use this variable to ignore shared library files that have the executable bit set, but are not executable files. The pattern matching honors the setting of the extglob shell option.
 
 ## FCEDIT
 The editor used as a default by the -e option to the fc builtin command.
@@ -333,16 +346,19 @@ An array variable containing the list of groups of which the current user is a m
 
 ## histchars
 Up to three characters which control history expansion, quick substitution, and tokenization (see History Interaction). The first character is the history expansion character, that is, the character which signifies the start of a history expansion, normally ‘!’. The second character is the character which signifies ‘quick substitution’ when seen as the first character on a line, normally ‘^’. The optional third character is the character which indicates that the remainder of the line is a comment when found as the first character of a word, usually ‘#’. The history comment character causes history substitution to be skipped for the remaining words on the line. It does not necessarily cause the shell parser to treat the rest of the line as a comment.
+> bash
 
 ## HOME
 The current user's home directory. Set automatically by `login(1)` from the user's login directory in the password file `passwd(4)`. This environment variable also functions as the default argument for the `cd` builtin.  
-[ **dir** ]
+> path
 
 ## HOSTALIASES
 Gives the name of a file containing aliases to be used with gethostbyname(3).
+> bash
 
 ## HISTCMD
 The history number, or index in the history list, of the current command. If HISTCMD is unset, it loses its special properties, even if it is subsequently reset.
+> bash
 
 ## HISTCONTROL
 A colon-separated list of values controlling how commands are saved on the history list. If the list of values includes ‘ignorespace’, lines which begin with a space character are not saved in the history list. A value of ‘ignoredups’ causes lines which match the previous history entry to not be saved. A value of ‘ignoreboth’ is shorthand for ‘ignorespace’ and ‘ignoredups’. A value of ‘erasedups’ causes all previous lines matching the current line to be removed from the history list before that line is saved. Any value not in the above list is ignored. If HISTCONTROL is unset, or does not include a valid value, all lines read by the shell parser are saved on the history list, subject to the value of HISTIGNORE. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTCONTROL.
@@ -352,49 +368,53 @@ The name of the file to which the command history is saved. The default value is
 
 ## HISTFILESIZE
 The maximum number of lines contained in the history file. When this variable is assigned a value, the history file is truncated, if necessary, to contain no more than that number of lines by removing the oldest entries. The history file is also truncated to this size after writing it when a shell exits. If the value is 0, the history file is truncated to zero size. Non-numeric values and numeric values less than zero inhibit truncation. The shell sets the default value to the value of HISTSIZE after reading any startup files.
+> bash
 
 ## HISTIGNORE
 A colon-separated list of patterns used to decide which command lines should be saved on the history list. Each pattern is anchored at the beginning of the line and must match the complete line (no implicit ‘\*’ is appended). Each pattern is tested against the line after the checks specified by HISTCONTROL are applied. In addition to the normal shell pattern matching characters, ‘&’ matches the previous history line. ‘&’ may be escaped using a backslash; the backslash is removed before attempting a match. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTIGNORE. The pattern matching honors the setting of the extglob shell option. HISTIGNORE subsumes the function of HISTCONTROL. A pattern of ‘&’ is identical to ignoredups, and a pattern of ‘[ ]*’ is identical to ignorespace. Combining these two patterns, separating them with a colon, provides the functionality of ignoreboth.
 
 ## HISTSIZE
 The maximum number of commands to remember on the history list. If the value is 0, commands are not saved in the history list. Numeric values less than zero result in every command being saved on the history list (there is no limit). The shell sets the default value to 500 after reading any startup files.
+> bash
 
 ## HISTTIMEFORMAT
 If this variable is set and not null, its value is used as a format string for strftime to print the time stamp associated with each history entry displayed by the history builtin. If this variable is set, time stamps are written to the history file so they may be preserved across shell sessions. This uses the history comment character to distinguish timestamps from other history lines.
+> bash
 
 ## HOSTFILE
 Contains the name of a file in the same format as /etc/hosts that should be read when the shell needs to complete a hostname. The list of possible hostname completions may be changed while the shell is running; the next time hostname completion is attempted after the value is changed, Bash adds the contents of the new file to the existing list. If HOSTFILE is set, but has no value, or does not name a readable file, Bash attempts to read /etc/hosts to obtain the list of possible hostname completions. When HOSTFILE is unset, the hostname list is cleared.
+> bash
 
 ## HOSTNAME
 The name of the current host.
 
 ## HOSTTYPE
 A string describing the machine Bash is running on.
+> bash
 
 ## HTTP_PROXY
 This variable defnes which proxy server should be used for an Internet connection.
 
 ## IFS
 List of characters that separate fields, when shell splits words as part of expansion.  
+> bash
 
 ## IGNOREEOF
 Controls the action of the shell on receipt of an EOF character as the sole input. If set, the value denotes the number of consecutive EOF characters that can be read as the first character on an input line before the shell will exit. If the variable exists but does not have a numeric value (or has no value) then the default is 10. If the variable does not exist, then EOF signifies the end of input to the shell. This is only in effect for interactive shells.
+> bash
 
 ## INPUTRC
 The name of the Readline initialization file, overriding the default of ~/.inputrc.
+> readline
 
 ## LANG
-Used to determine the locale category for any category not specifically selected with a 
-variable starting with `LC_`.
+Used to determine the locale category for any category not specifically selected with a variable starting with `LC_`.
 
 ## LC_ALL
-This variable overrides the value of `LANG` and any other `LC_` variable specifying a 
-locale category.
+This variable overrides the value of `LANG` and any other `LC_` variable specifying a locale category.
 
 ## LC_COLLATE
-This variable determines the collation order used when sorting the results of filename 
-expansion, and determines the behavior of range expressions, equivalence classes, and 
-collating sequences within filename expansion and pattern matching.
+This variable determines the collation order used when sorting the results of filename expansion, and determines the behavior of range expressions, equivalence classes, and collating sequences within filename expansion and pattern matching.
 
 ## LC_CTYPE
 This variable determines the interpretation of characters and the behavior of character 
@@ -441,17 +461,18 @@ This variable can be used to monitor any file or directory:
 - if directory is monitored, the shell will alert when new files are added or deleted from it
 To monitor several files/directories and specify custom alert messages, see `MAILPATH`.  
 Example: `MAIL=$HOME/.bashrc`  
-> `filename`
+> filename, hook
 
 ## MAILCHECK
 Specifies how often (in seconds) the shell checks for mail (as specified in the MAILPATH or MAIL). The default is 60 seconds. When it is time to check for mail, the shell does so before displaying the primary prompt. If not set to an integer greater than 0, the shell disables mail checking.
-> `integer`
+> integer
 
 ## MAILPATH
 A colon-separated list of filenames which the shell periodically checks for new mail.  
 Each list entry can specify the message that is printed when new mail arrives in the mail file by separating the filename from the message with a `?`. When used in the text of the message, `$_` expands to the name of the current mail file (but it must be inside single quotes, otherwise it will expand into shell variable, `$_`, which contains the last argument of the previous command).  
 This variable can be used to monitor any file or directory: see MAIL.  
 Example: `MAILPATH=$HOME/.bashrc?'$_ modified!':$HOME/dots?'New file added in $_'`  
+> filename and paths, hook
 
 ## MANPATH
 Colon separated list of directories to search for manual pages.
