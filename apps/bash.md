@@ -1,8 +1,11 @@
 # Bash
 
 Environment variables used in bash:
+- inhereted from Bourne shell
 - set by bash
-- recognized by bash
+- read by bash
+- foreign enwars considered by bash
+
 
 
 **List of environment variables set by bash**
