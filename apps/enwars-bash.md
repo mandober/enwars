@@ -1,5 +1,12 @@
 # Environment variables recognized by bash
 
+<!-- TOC -->
+
+- [Set and used by bash only](#set-and-used-by-bash-only)
+- [Set by bash](#set-by-bash)
+
+<!-- /TOC -->
+
 ## Set and used by bash only
 
 BASH
@@ -30,7 +37,7 @@ READLINE_LINE
 READLINE_POINT
 
 
-## set by bash
+## Set by bash
 
 GROUPS
 OPTARG
