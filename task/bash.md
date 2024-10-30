@@ -1,14 +1,12 @@
-# Bash
+# Environment Variables :: Bash
 
-Environment variables used in bash:
+Classes of env vars used in bash:
 - inhereted from Bourne shell
-- set by bash
+- Env vars set by bash
 - read by bash
-- foreign enwars considered by bash
+- considered by bash
 
-
-
-**List of environment variables set by bash**
+## Env vars set by bash
 
 ## BASH
 - desc: The full pathname used to execute the current instance of bash.

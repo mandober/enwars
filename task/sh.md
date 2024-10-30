@@ -1,7 +1,6 @@
 # Bourne shell variables
 
-Variables used by Bourne shell:
-
+Variables used by the Bourne shell:
 - CDPATH
 - HOME
 - IFS

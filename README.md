@@ -1,7 +1,6 @@
-# Enwars
+# Index of environment variables
 
-List of common environment variables.
-
+List of environment variables (env vars, envars, enwars) on Linux.
 
 <!-- TOC -->
 
@@ -98,11 +97,13 @@ List of common environment variables.
 - [SHELL](#shell)
 - [SHELLOPTS](#shellopts)
 - [SHLVL](#shlvl)
+- [SIMPLE_BACKUP_SUFFIX](#simple_backup_suffix)
 - [TEMP](#temp)
 - [TERM](#term)
 - [TERM_PROGRAM](#term_program)
 - [TERMCAP](#termcap)
 - [TERMINFO](#terminfo)
+- [TERMINFO_DIRS](#terminfo_dirs)
 - [TMP](#tmp)
 - [TMPDIR](#tmpdir)
 - [TIMEFORMAT](#timeformat)
@@ -113,6 +114,7 @@ List of common environment variables.
 - [UID](#uid)
 - [USER](#user)
 - [VISUAL](#visual)
+- [VERSION_CONTROL](#version_control)
 - [XDG_DATA_HOME](#xdg_data_home)
 - [XDG_CONFIG_HOME](#xdg_config_home)
 - [XDG_DATA_DIRS](#xdg_data_dirs)
@@ -127,15 +129,19 @@ List of common environment variables.
 
 
 ## BROWSER
-Set name of default browser.
+Set path to default browser. If only name is set, uses PATH to search for it.
 
 ## CDPATH
-A colon-separated list of directories used as a search path for the `cd` builtin command. This user-settable variable is used to specify frequently visited directories.
-- If the target directory of the `cd` command is specified as a relative path name, the `cd` first searches for the target directory in the current directory `.`.
-- If the target is not found, the path names that are listed in the CDPATH variable are searched consecutively until the target directory is found and the directory change is completed.
-- If the target directory is not found, the current working directory is left unmodified.
-- For example, suppose the CDPATH variable is set to `/home/jean`, and two directories exist under `/home/jean`, `bin`, and `doc`. If you are in the `/home/jean/bin` directory and type `cd doc`, you change directories to `/home/jean/doc`, even though you do not specify a full path.  
-> Shell: bash  
+A colon-separated list of dirs used like PATH but for dirs. Consulted by `cd`. User-settable env var.
+
+If the target directory of the `cd` command is specified as a relative path name, the `cd` first searches for the target directory in cwd. If the target is not found, the path names that are listed in the CDPATH variable are searched consecutively until the target directory is found and the directory change is completed. If the target directory is not found, the current working directory is left unmodified. For example, if CDPATH is set to `/home/jean`, and there are home/jean/{bin,doc}. If cwd is `/home/jean/bin` typing `cd doc` changes cwd to `/home/jean/doc`.
+
+- origin: bash
+- value: colon-separated list of dirs
+- read-by: cd
+- access: user-settable
+- purpose: navigation
+
 
 ## CHILD_MAX
 Set the number of exited child status values for the shell to remember. Bash will not allow this value to be decreased below a POSIX-mandated minimum, and there is a maximum value (currently 8192) that this may not exceed. The minimum value is system-dependent.
@@ -157,7 +163,7 @@ The index of the current cursor position relative to the beginning of the curren
 > Shell: bash, readline
 
 ## COMP_TYPE
-Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, ‘?’, for listing completions after successive tabs, ‘!’, for listing alternatives on partial word completion, ‘@’, to list completions if the word is not unmodified, or ‘%’, for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
+Set to an integer value corresponding to the type of completion attempted that caused a completion function to be called: TAB, for normal completion, '?', for listing completions after successive tabs, '!', for listing alternatives on partial word completion, '@', to list completions if the word is not unmodified, or '%', for menu completion. This variable is available only in shell functions and external commands invoked by the programmable completion facilities.
 > Shell: bash, readline
 
 ## COMP_KEY
@@ -192,7 +198,7 @@ domain name
 Set name of default (line) text editor.
 
 ## EMACS
-If Bash finds this variable in the environment when the shell starts with value ‘t’, it assumes that the shell is running in an Emacs shell buffer and disables line editing.
+If Bash finds this variable in the environment when the shell starts with value 't', it assumes that the shell is running in an Emacs shell buffer and disables line editing.
 
 ## ENV
 Similar to BASH_ENV; used when the shell is invoked in POSIX Mode.
@@ -202,13 +208,15 @@ Similar to BASH_ENV; used when the shell is invoked in POSIX Mode.
 The numeric effective user id of the current user. This variable is readonly.
 
 ## EXECIGNORE
-A colon-separated list of shell patterns defining the list of filenames to be ignored by command search using PATH. Files whose full pathnames match one of these patterns are not considered executable files for the purposes of completion and command execution via PATH lookup. This does not affect the behavior of the \[, test, and [[ commands. Full pathnames in the command hash table are not subject to EXECIGNORE. Use this variable to ignore shared library files that have the executable bit set, but are not executable files. The pattern matching honors the setting of the extglob shell option.
+*A colon-separated list of shell patterns* defining the list of filenames to be ignored by command search using PATH.
+
+Files whose full pathnames match one of these patterns are not considered executable files for the purposes of completion and command execution via PATH lookup. This does not affect the behavior of the `[`, `test`, and `[[` commands. Full pathnames in the command hash table are not subject to EXECIGNORE. Use this variable to ignore shared library files that have the executable bit set, but are not executable files. The pattern matching honors the setting of the extglob shell option.
 
 ## FCEDIT
 The editor used as a default by the -e option to the fc builtin command.
 
 ## FIGNORE
-A colon-separated list of suffixes to ignore when performing filename completion. A filename whose suffix matches one of the entries in FIGNORE is excluded from the list of matched filenames. A sample value is ‘.o:~’
+A colon-separated list of suffixes to ignore when performing filename completion. A filename whose suffix matches one of the entries in FIGNORE is excluded from the list of matched filenames. A sample value is '.o:~'
 
 ## FUNCNAME
 An array variable containing the names of all shell functions currently in the execution call stack. The element with index 0 is the name of any currently-executing shell function. The bottom-most element (the one with the highest index) is "main". This variable exists only when a shell function is executing. Assignments to FUNCNAME have no effect. If FUNCNAME is unset, it loses its special properties, even if it is subsequently reset.
@@ -225,7 +233,7 @@ A colon-separated list of patterns defining the set of filenames to be ignored b
 An array variable containing the list of groups of which the current user is a member. Assignments to GROUPS have no effect. If GROUPS is unset, it loses its special properties, even if it is subsequently reset.
 
 ## histchars
-Up to three characters which control history expansion, quick substitution, and tokenization (see History Interaction). The first character is the history expansion character, that is, the character which signifies the start of a history expansion, normally ‘!’. The second character is the character which signifies ‘quick substitution’ when seen as the first character on a line, normally ‘^’. The optional third character is the character which indicates that the remainder of the line is a comment when found as the first character of a word, usually ‘#’. The history comment character causes history substitution to be skipped for the remaining words on the line. It does not necessarily cause the shell parser to treat the rest of the line as a comment.
+Up to three characters which control history expansion, quick substitution, and tokenization (see History Interaction). The first character is the history expansion character, that is, the character which signifies the start of a history expansion, normally '!'. The second character is the character which signifies 'quick substitution' when seen as the first character on a line, normally '^'. The optional third character is the character which indicates that the remainder of the line is a comment when found as the first character of a word, usually '#'. The history comment character causes history substitution to be skipped for the remaining words on the line. It does not necessarily cause the shell parser to treat the rest of the line as a comment.
 
 ## HOME
 - $HOMEholds the current user's home directory
@@ -250,7 +258,7 @@ Up to three characters which control history expansion, quick substitution, and 
 
 
 ## HISTCONTROL
-A colon-separated list of values controlling how commands are saved on the history list. If the list of values includes ‘ignorespace’, lines which begin with a space character are not saved in the history list. A value of ‘ignoredups’ causes lines which match the previous history entry to not be saved. A value of ‘ignoreboth’ is shorthand for ‘ignorespace’ and ‘ignoredups’. A value of ‘erasedups’ causes all previous lines matching the current line to be removed from the history list before that line is saved. Any value not in the above list is ignored. If HISTCONTROL is unset, or does not include a valid value, all lines read by the shell parser are saved on the history list, subject to the value of HISTIGNORE. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTCONTROL.
+A colon-separated list of values controlling how commands are saved on the history list. If the list of values includes 'ignorespace', lines which begin with a space character are not saved in the history list. A value of 'ignoredups' causes lines which match the previous history entry to not be saved. A value of 'ignoreboth' is shorthand for 'ignorespace' and 'ignoredups'. A value of 'erasedups' causes all previous lines matching the current line to be removed from the history list before that line is saved. Any value not in the above list is ignored. If HISTCONTROL is unset, or does not include a valid value, all lines read by the shell parser are saved on the history list, subject to the value of HISTIGNORE. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTCONTROL.
 
 ## HISTFILE
 The name of the file to which the command history is saved. The default value is ~/.bash_history.
@@ -260,7 +268,7 @@ The maximum number of lines contained in the history file. When this variable is
 > bash
 
 ## HISTIGNORE
-A colon-separated list of patterns used to decide which command lines should be saved on the history list. Each pattern is anchored at the beginning of the line and must match the complete line (no implicit ‘\*’ is appended). Each pattern is tested against the line after the checks specified by HISTCONTROL are applied. In addition to the normal shell pattern matching characters, ‘&’ matches the previous history line. ‘&’ may be escaped using a backslash; the backslash is removed before attempting a match. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTIGNORE. The pattern matching honors the setting of the extglob shell option. HISTIGNORE subsumes the function of HISTCONTROL. A pattern of ‘&’ is identical to ignoredups, and a pattern of ‘[ ]*’ is identical to ignorespace. Combining these two patterns, separating them with a colon, provides the functionality of ignoreboth.
+A colon-separated list of patterns used to decide which command lines should be saved on the history list. Each pattern is anchored at the beginning of the line and must match the complete line (no implicit '\*' is appended). Each pattern is tested against the line after the checks specified by HISTCONTROL are applied. In addition to the normal shell pattern matching characters, '&' matches the previous history line. '&' may be escaped using a backslash; the backslash is removed before attempting a match. The second and subsequent lines of a multi-line compound command are not tested, and are added to the history regardless of the value of HISTIGNORE. The pattern matching honors the setting of the extglob shell option. HISTIGNORE subsumes the function of HISTCONTROL. A pattern of '&' is identical to ignoredups, and a pattern of '[ ]*' is identical to ignorespace. Combining these two patterns, separating them with a colon, provides the functionality of ignoreboth.
 
 ## HISTSIZE
 The maximum number of commands to remember on the history list. If the value is 0, commands are not saved in the history list. Numeric values less than zero result in every command being saved on the history list (there is no limit). The shell sets the default value to 500 after reading any startup files.
@@ -429,7 +437,7 @@ contain a third-level file hierarchy under it (bin, etc, include, lib, sbin, sha
 Many utilities will look up this variable upon installation to place their files there.
 
 ## PPID
-[bash] The process ID of the shell’s parent process. This variable is `read-only`.
+[bash] The process ID of the shell's parent process. This variable is `read-only`.
 
 ## PRINTER
 PRINTER or LPDEST may specify the desired printer to use. See lpr(1).
@@ -452,10 +460,10 @@ The secondary prompt string. The default value is `>`
 *<sh>*
 
 ## PS3
-The value of this variable is used as the prompt for the select command. If this variable is not set, the select command prompts with ‘#? ’
+The value of this variable is used as the prompt for the select command. If this variable is not set, the select command prompts with '#? '
 
 ## PS4
-The value is the prompt printed before the command line is echoed when the -x option is set (see The Set Builtin). The first character of PS4 is replicated multiple times, as necessary, to indicate multiple levels of indirection. The default is ‘+ ’.
+The value is the prompt printed before the command line is echoed when the -x option is set (see The Set Builtin). The first character of PS4 is replicated multiple times, as necessary, to indicate multiple levels of indirection. The default is '+ '.
 
 ## PWD
 This variable points to the current directory. Equivalent to the output of the command `pwd` when called without arguments. Changes to PWD are maintained by the `cd` command.
@@ -464,10 +472,10 @@ This variable points to the current directory. Equivalent to the output of the c
 Each time this parameter is referenced, a random integer between 0 and 32767 is generated. Assigning a value to this variable seeds the random number generator.
 
 ## READLINE_LINE
-The contents of the Readline line buffer, for use with ‘bind -x’ (see Bash Builtins).
+The contents of the Readline line buffer, for use with 'bind -x' (see Bash Builtins).
 
 ## READLINE_POINT
-The position of the insertion point in the Readline line buffer, for use with ‘bind -x’ (see Bash Builtins).
+The position of the insertion point in the Readline line buffer, for use with 'bind -x' (see Bash Builtins).
 
 ## REPLY
 The default variable for the read builtin.
@@ -476,32 +484,42 @@ The default variable for the read builtin.
 This variable expands to the number of seconds since the shell was started. Assignment to this variable resets the count to the value assigned, and the expanded value becomes the value assigned plus the number of seconds since the assignment.
 
 ## SHELL
-The full pathname to the shell is kept in this environment variable. If it is not set 
-when the shell starts, Bash assigns to it the full pathname of the current user’s login shell.
+The full pathname to the shell is kept in this environment variable. If it is not set when the shell starts, Bash assigns to it the full pathname of the current user's login shell.
 
 ## SHELLOPTS
-A colon-separated list of enabled shell options. Each word in the list is a valid argument 
-for `set -o` builtin. The options appearing in SHELLOPTS are those reported as enabled
-by `set -o`. If this variable is in the environment when Bash starts up, each shell option 
-in the list will be enabled before reading any startup files. This variable is *readonly*.
+A colon-separated list of enabled shell options. Each word in the list is a valid argument for `set -o` builtin. The options appearing in SHELLOPTS are those reported as enabled by `set -o`. If this variable is in the environment when Bash starts up, each shell option in the list will be enabled before reading any startup files. This variable is *readonly*.
 
 ## SHLVL
 Incremented by one each time a new instance of Bash is started. This is intended to be a count of how deeply your Bash shells are nested.
 
+## SIMPLE_BACKUP_SUFFIX
+Some GNU programs (at least cp, install, ln, mv) can make backups of files before writing new versions. The option `--suffix=SUFFIX` specifies the SUFFIX to append to each backup file. If this option is not specified, the value of the `SIMPLE_BACKUP_SUFFIX` environment variable is used; if unset, the default is `~`.
+
 ## TEMP
-Directory to store temporary files.
+Directory to store temporary files. See also TMP.
 
 ## TERM
-Defines the terminal. This variable should be reset in either the /etc/profile or /etc/.login file. When the user invokes an editor, the system looks for a file with the same name that is defined in this environment variable. The system searches the directory referenced by TERMINFO to determine the terminal characteristics.
+Specifies the terminal model or family. Probably the most common value is 'xterm-256color'. This value says that the terminal is xterm compatible and supports 256 colors. You can check the associated entry with `infocmp $TERM`, which contains the string `colors#0x100` (0x100 is 256). There are actually numerous other entries with the 'xterm' prefix, like 'xterm-direct'. Doing `infocmp xterm-direct` shows `colors#0x1000000` and `pairs#0x10000`, which implies true color support (24-bit color, 2⁸×2⁸×2⁸ = 256³ = 2²⁴ = 16,777,216); `pairs` is the max numbers of color-pairs that can be displayed simultaneously (65,536).
+
+*Terminfo* describes terminals by giving a set of capabilities which they have, by specifying how to perform screen operations, and by specifying padding requirements and initialization sequences. It is primarily used by screen-oriented programs. 
+
+Setting this to an incompatible value may screw up different aspects (usually colors, but posibly other things too) of screen-programs.
+
+This env var is related to the terminfo database of terminal escape codes. 
+
+A utility that wants to emit special escape codes needs to lookup a proper sequence the current terminal supports. The terminfo maintains a database of terminal escape codes arranged by terminal names. So utilities usually read the TERM to get the terminal name, then search the terminfo database by that name.
 
 ## TERM_PROGRAM
-Type of program used as a terminal.  Same as `TMP`.
+Type of program used as a terminal. Similar to TERM.
 
 ## TERMCAP
-Database entry of the terminal escape codes to perform various terminal functions.
+The termcap (terminal capability) is an older standard, succeeded by 'terminfo', that associates concrete terminals with their characteristics. An entry in the termcap database lists terminal properties like number of supported colors, including all supported capabilities and their sequences. TERMCAP env var points to a custom termcap configuration.
 
 ## TERMINFO
 Names a directory where an alternate terminfo database is stored. Use the TERMINFO variable in either the `/etc/profile` or `/etc/.login file`. For more information, see the terminfo(4) man page. When the TERMINFO environment variable is set, the system first checks the TERMINFO path defined by the user. If the system does not find a definition for a terminal in the TERMINFO directory defined by the user, it searches the default directory, `/usr/share/lib/terminfo`, for a definition. If the system does not find a definition in either location, the terminal is identified as "dumb".
+
+## TERMINFO_DIRS
+Directories searched for terminfo entries.
 
 ## TMP
 Directory to store temporary files. Same as `TEMP`.
@@ -516,7 +534,7 @@ The `%` character introduces an escape sequence that is expanded to a time value
 information. The escape sequences and their meanings are as follows; the braces denote 
 optional portions.
 ```
-%% = A literal ‘%’.
+%% = A literal '%'.
 %[p][l]R = The elapsed time in seconds.
 %[p][l]U = The number of CPU seconds spent in user mode.
 %[p][l]S = The number of CPU seconds spent in system mode.
@@ -532,7 +550,7 @@ If set to a value greater than zero, TMOUT is treated as the default timeout for
 does not arrive.
 
 ## TMPDIR
-If set, Bash uses its value as the name of a directory in which Bash creates temporary files for the shell’s use.
+If set, Bash uses its value as the name of a directory in which Bash creates temporary files for the shell's use.
 
 ## TZ
 Sets the time zone. The time zone is used to display dates, for example, in the ls -l command. If TZ is not set in the user's environment, the system setting is used. Otherwise, Greenwich Mean Time is used. Commands that print times (and dates) use this variable to determine the time zone. If the TZ variable is left undefined, the operating system's current time zone setting is used. See timezone for details. On Windows, the MKS Toolkit makes use of the built-in timezone support, and you should not set the TZ environment variable.
@@ -552,6 +570,9 @@ The name of the logged-in user (used by some BSD-derived programs).
 
 ## VISUAL
 Set name of default (full-screen) text editor.
+
+## VERSION_CONTROL
+Some GNU programs (at least cp, install, ln, mv) can make backups of files before writing new versions. The option `--backup[=METHOD]` controls the type of backup to make. When this option is used but METHOD is not specified, the valujeof `VERSION_CONTROL` env var is used; if unset, the default backup type is 'existing'.
 
 ## XDG_DATA_HOME
 defines the base directory relative to which user specific data files should be stored. If $XDG_DATA_HOME is either not set or empty, a default equal to $HOME/.local/share should be used.
